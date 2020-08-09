@@ -17,13 +17,14 @@ namespace BTCPayServer.Payments.Bitcoin
 
         }
 
-        public BitcoinLikePaymentData(BitcoinAddress address, IMoney value, OutPoint outpoint, bool rbf)
+        public BitcoinLikePaymentData(BitcoinAddress address, IMoney value, OutPoint outpoint, bool rbf, uint? index)
         {
             Address = address;
             Value = value;
             Outpoint = outpoint;
             ConfirmationCount = 0;
             RBF = rbf;
+            Index = index;
         }
         [JsonIgnore]
         public BTCPayNetworkBase Network { get; set; }
@@ -34,6 +35,7 @@ namespace BTCPayServer.Payments.Bitcoin
         public int ConfirmationCount { get; set; }
         public bool RBF { get; set; }
         public BitcoinAddress Address { get; set; }
+        public uint? Index { get; set; }
         public IMoney Value { get; set; }
 
         [JsonProperty(DefaultValueHandling = DefaultValueHandling.Ignore)]

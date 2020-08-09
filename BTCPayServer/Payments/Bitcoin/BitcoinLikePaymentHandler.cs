@@ -159,7 +159,9 @@ namespace BTCPayServer.Payments.Bitcoin
                     break;
             }
 
-            onchainMethod.DepositAddress = (await prepare.ReserveAddress).Address.ToString();
+            var reserved = await prepare.ReserveAddress;
+            onchainMethod.DepositAddress = reserved.Address.ToString();
+            onchainMethod.Index = (uint?) reserved.GetIndex();
             onchainMethod.PayjoinEnabled = blob.PayJoinEnabled &&
                                            PayjoinClient.SupportedFormats.Contains(supportedPaymentMethod
                                                .AccountDerivation.ScriptPubKeyType()) &&
